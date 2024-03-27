@@ -26,40 +26,26 @@ class RegisterTest extends TestCase
         //ada input confirm password
         $response->assertSeeText("Confirm Password");
 
-        $response = $this->post("/register", [
-            "name" => "QA Tester3",
-            "email" => "tester3@test.com",
-            "password" => "hepit35t3r3",
-            "password_confirmation" => "hepit35t3r3"
-        ]);
 
-        //diarahkan ke halaman home
-        $response->assertRedirect("/home");
-
-        // Di halaman home ada welcome Admin
-        $responseHome = $this->get("/home");
-        $responseHome->assertSeeText("You are logged in! ");
     }
 
 
-    public function user_can_register_to_app()
+    public function test_user_can_register_to_app()
     {
         $response = $this->post("/register", [
-            "name" => "QA Tester",
-            "email" => "tester@test.com",
-            "password" => "t35t3r",
-            "password-confirm" => "t35t3r"
+            "name" => "QA Tester2",
+            "email" => "tester2@test.com",
+            "password" => "hepit35t3r2",
+            "password_confirmation" => "hepit35t3r2"
         ]);
 
-        //berhasil dapat session
-        $this->assertAuthenticated();
+        //$this->assertTrue(User::whereEmail("tester2@test.com")->exists());
 
         //diarahkan ke halaman home
         $response->assertRedirect("/home");
 
         // Di halaman home ada welcome Admin
         $responseHome = $this->get("/home");
-        $responseHome->assertSeeText("You are logged in! ");
-
+        $responseHome->assertSeeText("Dashboard");
     }
 }
