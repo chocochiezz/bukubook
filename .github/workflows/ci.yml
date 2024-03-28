@@ -26,3 +26,6 @@ jobs:
 
             - name: Run PHPStan
               run: ./vendor/bin/phpstan --error-format=github
+
+            - name: Feature Test
+              run: php artisan test
