@@ -51,7 +51,7 @@ jobs:
             - name: Install Front-end
               run:
                 npm install
-                npm run prod
+                npm run build
             - name: Feature Test
               env:
                 DB_CONNECTION: sqlite
