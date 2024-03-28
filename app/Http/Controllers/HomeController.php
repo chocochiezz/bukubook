@@ -23,7 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $variable = "";
+        variable = "";
         return view('home');
     }
 }
