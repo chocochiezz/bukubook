@@ -6,6 +6,15 @@ jobs:
     tests:
         name: Run Tests
         runs-on: ubuntu-latest
+        services:
+            mysql:
+                image: mysql:5.7
+                env:
+                    MYSQL_ROOT_PASSWORD: password
+                    MYSQL_DATABASE: bukubook
+                ports:
+                    - 3306:3306
+
         steps:
             - uses: actions/checkout@v3
 
@@ -28,7 +37,7 @@ jobs:
               run: ./vendor/bin/phpstan --error-format=github
 
             - name: Create env
-              run: php -r "file_exists('.env') || copy ('.env.example', '.env')"
+              run: php -r "file_exists('.env') || copy ('.env.example', '.env ci');"
 
             - name: Generate env key
               run: php artisan key:generate
